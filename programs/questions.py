@@ -92,7 +92,7 @@ def four(number):
 	# four('hello world!') → ' '
 
 def five(chars):
-		return min(x for x in chars if x in string.printable)
+		return min(chars)
 
 
 	# <QUESTION 6>
@@ -109,10 +109,24 @@ def five(chars):
 	# six('hello world, how are you?', 20) → ['hello world, how are', 'you?']
 	
 def six(paragraph, limit):
-	pages=[]
-	for i in range(0,len(paragraph),limit):
-		pages.append(paragraph[i:i+limit])
+	words = paragraph.split()
+	pages = []
+	
+	current_page = ''
+	for word in words:
+
+		new_text = f'{current_page} {word}'.lstrip()
+
+		if len(new_text) > limit and current_page != '':
+			pages.append(current_page)
+			current_page = word
+		else:
+			current_page = new_text
+
+	pages.append(current_page)
+
 	return pages
+	
 
 print(six('hello world, how are you?', 12))
 print(six('hello world, how are you?', 6))
