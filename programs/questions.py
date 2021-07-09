@@ -1,96 +1,119 @@
-    # <QUESTION 1>
+	# <QUESTION 1>
 
-    # Given a word and a string of characters, return the word with all of the given characters
-    # replaced with underscores
+	# Given a word and a string of characters, return the word with all of the given characters
+	# replaced with underscores
 
-    # This should be case sensitive
+	# This should be case sensitive
 
-    # <EXAMPLES>
+	# <EXAMPLES>
 
-    # one("hello world", "aeiou") → "h_ll_ w_rld"
-    # one("didgeridoo", "do") → "_i_geri___"
-    # one("punctation, or something?", " ,?") → "punctuation__or_something_"
+	# one("hello world", "aeiou") → "h_ll_ w_rld"
+	# one("didgeridoo", "do") → "_i_geri___"
+	# one("punctation, or something?", " ,?") → "punctuation__or_something_"
+import string
 
 def one(word, chars):
-    pass
+	for i in chars:
+		if i in word:
+			word=word.replace(i,"_")
+	return word
 
-    # <QUESTION 2>
+	# <QUESTION 2>
 
-    # Given an integer - representing total seconds - return a tuple of integers (of length 4) representing 
-    # days, hours, minutes, and seconds
+	# Given an integer - representing total seconds - return a tuple of integers (of length 4) representing 
+	# days, hours, minutes, and seconds
 
-    # <EXAMPLES>
+	# <EXAMPLES>
 
-    # two(270) → (0, 0, 4, 30)
-    # two(3600) → (0, 1, 0, 0)
-    # two(86400) → (1, 0, 0, 0)
+	# two(270) → (0, 0, 4, 30)
+	# two(3600) → (0, 1, 0, 0)
+	# two(86400) → (1, 0, 0, 0)
 
-    # <HINT>
+	# <HINT>
 
-    # There are 86,400 seconds in a day, and 3600 seconds in an hour
+	# There are 86,400 seconds in a day, and 3600 seconds in an hour
 
 def two(total_seconds):
-    pass
+	days = int((total_seconds % (86400*30))/86400)
+	hours = int((total_seconds % 86400) / 3600)
+	minutes = int((total_seconds % 3600) / 60)
+	seconds = int((total_seconds % 60))
+	calendar=(days,hours,minutes,seconds)
+	return calendar
 
-    # <QUESTION 3>
+	# <QUESTION 3>
 
-    # Given a dictionary mapping keys to values, return a new dictionary mapping the values
-    # to their corresponding keys
+	# Given a dictionary mapping keys to values, return a new dictionary mapping the values
+	# to their corresponding keys
 
-    # <EXAMPLES>
+	# <EXAMPLES>
 
-    # three({'hello':'hola', 'thank you':'gracias'}) → {'hola':'hello', 'gracias':'thank you'}
-    # three({101:'Optimisation', 102:'Partial ODEs'}) → {'Optimisation':101, 'Partial ODEs':102}
+	# three({'hello':'hola', 'thank you':'gracias'}) → {'hola':'hello', 'gracias':'thank you'}
+	# three({101:'Optimisation', 102:'Partial ODEs'}) → {'Optimisation':101, 'Partial ODEs':102}
 
-    # <HINT>
+	# <HINT>
 
-    # Dictionaries have methods that can be used to get their keys, values, or items
+	# Dictionaries have methods that can be used to get their keys, values, or items
 
 def three(dictionary):
-    pass
+	dictionary={val:key for key,val in dictionary.items()}
+	return dictionary
 
-    # <QUESTION 4>
+	# <QUESTION 4>
 
-    # Given an integer, return the largest of the numbers this integer is divisible by
-    # excluding itself
+	# Given an integer, return the largest of the numbers this integer is divisible by
+	# excluding itself
 
-    # This should also work for negative numbers
+	# This should also work for negative numbers
 
-    # <EXAMPLES>
+	# <EXAMPLES>
 
-    # four(10) → 5
-    # four(24) → 12
-    # four(7) → 1
-    # four(-10) → 5
+	# four(10) → 5
+	# four(24) → 12
+	# four(7) → 1
+	# four(-10) → 5
 
 def four(number):
-    pass
+	if number % 2 == 0:
+		return abs(int(number/2))
+	elif number % 3 == 0:
+		return abs(int(number/3))
+	else:
+		return abs(int(number/number))
 
-    # <QUESTION 5>
+	# <QUESTION 5>
 
-    # Given a string of characters, return the character with the lowest ASCII value
+	# Given a string of characters, return the character with the lowest ASCII value
 
-    # <EXAMPLES>
+	# <EXAMPLES>
 
-    # five('abcdef') → 'a'
-    # four('LoremIpsum') → 'I'
-    # four('hello world!') → ' '
+	# five('abcdef') → 'a'
+	# four('LoremIpsum') → 'I'
+	# four('hello world!') → ' '
 
 def five(chars):
-    pass
+		return min(x for x in chars if x in string.printable)
 
-    # <QUESTION 6>
 
-    # Given a paragraph of text and an integer, break the paragraph into "pages" (a list of strings), where the
-    # length of each page is less than the given integer
+	# <QUESTION 6>
 
-    # Don't break words up across pages!
+	# Given a paragraph of text and an integer, break the paragraph into "pages" (a list of strings), where the
+	# length of each page is less than the given integer
 
-    # <EXAMPLES>
+	# Don't break words up across pages!
 
-    # six('hello world, how are you?', 12) → ['hello world,', 'how are you?']
-    # six('hello world, how are you?', 6) → ['hello', 'world,', 'how', 'are', 'you?']
-    # six('hello world, how are you?', 20) → ['hello world, how are', 'you?']
-    
+	# <EXAMPLES>
+
+	# six('hello world, how are you?', 12) → ['hello world,', 'how are you?']
+	# six('hello world, how are you?', 6) → ['hello', 'world,', 'how', 'are', 'you?']
+	# six('hello world, how are you?', 20) → ['hello world, how are', 'you?']
+	
 def six(paragraph, limit):
-    pass
+	pages=[]
+	for i in range(0,len(paragraph),limit):
+		pages.append(paragraph[i:i+limit])
+	return pages
+
+print(six('hello world, how are you?', 12))
+print(six('hello world, how are you?', 6))
+print(six('hello world, how are you?', 20))
